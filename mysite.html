@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Systems Administrator Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* -------------------------------------------
+           CSS STYLES (Design)
+        ------------------------------------------- */
+        :root {
+            --bg-color: #0f172a;       /* Slate 900 */
+            --bg-alt: #1e293b;         /* Slate 800 */
+            --text-color: #f1f5f9;     /* Slate 100 */
+            --text-muted: #94a3b8;     /* Slate 400 */
+            --accent: #38bdf8;         /* Sky 400 */
+            --accent-hover: #0ea5e9;   /* Sky 500 */
+            --border: #334155;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        body.light-mode {
+            --bg-color: #ffffff;
+            --bg-alt: #f8fafc;
+            --text-color: #0f172a;
+            --text-muted: #475569;
+            --accent: #0284c7;         /* Sky 600 */
+            --accent-hover: #0369a1;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 80px 0; }
+        .bg-alt { background-color: var(--bg-alt); }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--text-color); }
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 4px;
+            background: var(--accent); margin: 10px auto 0; border-radius: 2px;
+        }
+
+        /* Buttons */
+        .btn-primary, .btn-outline {
+            display: inline-block; padding: 12px 28px; border-radius: 5px;
+            font-weight: 500; cursor: pointer;
+        }
+        .btn-primary { background: var(--accent); color: #0f172a; border: 2px solid var(--accent); }
+        .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+        .btn-outline { background: transparent; color: var(--text-color); border: 2px solid var(--accent); }
+        .btn-outline:hover { background: var(--accent); color: #0f172a; }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px);
+            z-index: 1000; border-bottom: 1px solid var(--border); padding: 15px 0;
+        }
+        body.light-mode .navbar { background: rgba(255, 255, 255, 0.95); }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; gap: 30px; }
+        .nav-links a { font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--accent); }
+        #theme-toggle { background: none; border: none; color: var(--text-color); font-size: 1.2rem; cursor: pointer; }
+
+        /* Hero */
+        .hero { height: 100vh; display: flex; align-items: center; padding-top: 60px; }
+        .hero-subtitle { color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+        .hero-title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 10px; }
+        .hero-role { font-size: 1.5rem; color: var(--text-muted); font-weight: 500; margin-bottom: 20px; }
+        .hero-desc { max-width: 600px; color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; }
+        .hero-btns { display: flex; gap: 15px; }
+
+        /* About & Grid */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-image img { border-radius: 10px; border: 3px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .about-text p { margin-bottom: 15px; color: var(--text-muted); }
+
+        /* Skills */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .skill-card {
+            background: var(--bg-color); padding: 30px; border-radius: 8px;
+            border: 1px solid var(--border); text-align: center; transition: var(--transition);
+        }
+        .skill-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .skill-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+        .skill-card h3 { margin-bottom: 15px; }
+        .skill-card ul li { color: var(--text-muted); margin-bottom: 8px; font-size: 0.9rem; }
+
+        /* Projects */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .project-card {
+            background: var(--bg-alt); border-radius: 10px; overflow: hidden;
+            border: 1px solid var(--border); transition: var(--transition);
+        }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .project-content { padding: 30px; }
+        .tag {
+            display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+            padding: 4px 10px; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
+            margin-right: 5px; margin-bottom: 15px;
+        }
+        .project-content p { color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem; }
+        .project-link { color: var(--text-color); font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; }
+        .project-link:hover { color: var(--accent); }
+
+        /* Timeline */
+        .timeline { max-width: 800px; margin: 0 auto; position: relative; border-left: 2px solid var(--border); padding-left: 30px; }
+        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -37px; top: 5px; width: 12px; height: 12px;
+            background: var(--accent); border-radius: 50%; border: 3px solid var(--bg-alt);
+        }
+        .timeline-date { color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; }
+        .timeline-content h3 { font-size: 1.2rem; }
+        .timeline-content h4 { font-size: 1rem; color: var(--text-muted); font-weight: 400; margin-bottom: 10px; }
+        .timeline-content ul li { color: var(--text-muted); margin-bottom: 5px; list-style: disc; margin-left: 20px; }
+
+        /* Services */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .service-card {
+            background: var(--bg-alt); padding: 30px; border-radius: 8px;
+            text-align: center; border: 1px solid var(--border);
+        }
+        .service-card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; }
+        .service-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Objective */
+        .bg-accent { background: var(--accent); color: #0f172a; text-align: center; }
+        .objective-content { max-width: 800px; margin: 0 auto; }
+        .objective-content h2 { color: #0f172a; margin-bottom: 15px; }
+        .objective-content p { font-size: 1.1rem; font-weight: 500; }
+
+        /* Contact */
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 12px; border-radius: 5px; border: 1px solid var(--border);
+            background: var(--bg-alt); color: var(--text-color); font-family: inherit;
+        }
+        .social-icons { display: flex; gap: 20px; }
+        .social-icons a {
+            width: 50px; height: 50px; background: var(--bg-alt); display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-size: 1.2rem; border: 1px solid var(--border);
+        }
+        .social-icons a:hover { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+
+        /* Footer */
+        footer { padding: 30px 0; text-align: center; border-top: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); }
+        .back-to-top { display: block; margin-top: 10px; color: var(--accent); font-weight: 600; }
+
+        /* Animations */
+        .hidden { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .show { opacity: 1; transform: translateY(0); }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .about-grid, .contact-wrapper { grid-template-columns: 1fr; }
+            .timeline { border-left: none; padding-left: 0; }
+            .timeline-item::before { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <a href="#" class="logo">Admin<span>.Dev</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact" class="btn-primary">Contact Me</a></li>
+                <li><button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="container hero-flex">
+            <div class="hero-content hidden">
+                <p class="hero-subtitle">Hello, I'm</p>
+                <h1 class="hero-title">[YOUR NAME]</h1>
+                <h2 class="hero-role">IT Systems & Operations Administrator</h2>
+                <p class="hero-desc">
+                    Bridging the gap between technical infrastructure and business operations. 
+                    I secure systems, manage ERP data, and automate workflows to drive operational efficiency.
+                </p>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn-primary">View Projects</a>
+                    <a href="#contact" class="btn-outline">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title hidden">About Me</h2>
+            <div class="about-grid hidden">
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/400x400/1e293b/38bdf8?text=Your+Photo" alt="Profile Photo">
+                </div>
+                <div class="about-text">
+                    <p>
+                        With nearly 2 years of hands-on experience in high-pressure retail environments, I specialize in the intersection of <strong>System Administration</strong> and <strong>ERP Operations</strong>.
+                    </p>
+                    <p>
+                        My core philosophy is that IT should not just "fix problems" but actively improve business logic. I use technology—from <strong>Windows Server</strong> administration to <strong>Python automation</strong>—to ensure data accuracy, security, and uptime.
+                    </p>
+                    <p>
+                        I am currently certified in Google IT Support and actively pursuing Azure Administration, focused on creating resilient, hybrid-cloud infrastructures.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section bg-alt">
+        <div class="container">
+            <h2 class="section-title hidden">Technical Arsenal</h2>
+            <div class="skills-grid hidden">
+                <div class="skill-card">
+                    <i class="fa-brands fa-windows"></i>
+                    <h3>SysAdmin</h3>
+                    <ul>
+                        <li>Windows Server 2012/2019</li>
+                        <li>Active Directory & GPO</li>
+                        <li>Virtualization (Hyper-V)</li>
+                        <li>Backup Strategy (Veeam)</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <i class="fa-solid fa-database"></i>
+                    <h3>ERP & Data</h3>
+                    <ul>
+                        <li>Cegid Retail Expert</li>
+                        <li>SQL Server Management</li>
+                        <li>Inventory Reconciliation</li>
+                        <li>Sales Reporting</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <i class="fa-brands fa-python"></i>
+                    <h3>Automation</h3>
+                    <ul>
+                        <li>Python Scripting</li>
+                        <li>Pandas (Data Cleaning)</li>
+                        <li>n8n Workflows</li>
+                        <li>Excel Advanced (VLOOKUP)</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Network & Security</h3>
+                    <ul>
+                        <li>Sophos Firewall</li>
+                        <li>VPN Configuration</li>
+                        <li>Network Security</li>
+                        <li>Azure Fundamentals</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title hidden">Featured Projects</h2>
+            <div class="projects-grid hidden">
+                
+                <article class="project-card">
+                    <div class="project-content">
+                        <h3>Automated Stock Reconciliation</h3>
+                        <span class="tag">Python</span> <span class="tag">Pandas</span> <span class="tag">ERP</span>
+                        <p>
+                            A Python automation script that extracts raw data from Cegid ERP, compares it with physical inventory files, and instantly highlights discrepancies. Reduced manual reporting time by 90%.
+                        </p>
+                        <a href="#" class="project-link">View Code <i class="fa-brands fa-github"></i></a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-content">
+                        <h3>Hybrid Disaster Recovery</h3>
+                        <span class="tag">SysAdmin</span> <span class="tag">Veeam</span> <span class="tag">Azure</span>
+                        <p>
+                            Designed and implemented a 3-2-1 backup strategy for critical SQL databases. Automated daily snapshots to local storage and encrypted replication to off-site secure drives/cloud.
+                        </p>
+                        <a href="#" class="project-link">View Case Study <i class="fa-solid fa-file-pdf"></i></a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-content">
+                        <h3>Zero-Code Sales Alerting</h3>
+                        <span class="tag">n8n</span> <span class="tag">Automation</span> <span class="tag">Webhook</span>
+                        <p>
+                            An automated workflow that monitors the SQL database for daily sales totals and triggers a formatted Telegram/WhatsApp message to management every evening at 9 PM.
+                        </p>
+                        <a href="#" class="project-link">View Workflow <i class="fa-solid fa-diagram-project"></i></a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section bg-alt">
+        <div class="container">
+            <h2 class="section-title hidden">Professional History</h2>
+            <div class="timeline hidden">
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">June 2024 - Present</div>
+                    <div class="timeline-content">
+                        <h3>IT Systems & Operations Administrator</h3>
+                        <h4>[Current Company Name], Algiers</h4>
+                        <ul>
+                            <li>Sole administrator for IT infrastructure supporting 45 users (15 on-site, 30 remote).</li>
+                            <li>Manage critical Cegid ERP operations including pricing, stock provisioning, and master data integrity.</li>
+                            <li>Implemented automated Python scripts to clean messy Excel data for the Operations department.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2022 - 2024</div>
+                    <div class="timeline-content">
+                        <h3>IT Support Specialist (Internship)</h3>
+                        <h4>[Previous Company Name]</h4>
+                        <ul>
+                            <li>Provided Level 1 & 2 support for hardware and software issues.</li>
+                            <li>Assisted in Windows 10 deployment and network cabling projects.</li>
+                            <li>Gained foundational certification in Google IT Support.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title hidden">Services</h2>
+            <div class="services-grid hidden">
+                <div class="service-card">
+                    <i class="fa-solid fa-server"></i>
+                    <h3>System Administration</h3>
+                    <p>Complete management of Windows Servers, Active Directory, and secure Backup strategies.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-shop"></i>
+                    <h3>Retail IT Solutions</h3>
+                    <p>Specialized management of Cegid ERP, POS systems, and inventory data integrity.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-robot"></i>
+                    <h3>Process Automation</h3>
+                    <p>Building custom Python scripts and n8n workflows to automate repetitive office tasks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="objective" class="section bg-accent">
+        <div class="container">
+            <div class="objective-content hidden">
+                <h2>Career Objective</h2>
+                <p>
+                    To leverage my hybrid expertise in Systems Administration and Retail Operations to assist a forward-thinking organization in securing their infrastructure and optimizing their business data flows. My goal is to transition into a Senior Cloud Administrator role within the next 3 years.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title hidden">Get In Touch</h2>
+            <div class="contact-wrapper hidden">
+                <form class="contact-form" action="#" onsubmit="alert('Connect via LinkedIn!'); return false;">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+
+                <div class="social-links">
+                    <h3>Connect</h3>
+                    <div class="social-icons">
+                        <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 [Your Name]. All Rights Reserved.</p>
+            <a href="#home" class="back-to-top">Back to Top <i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Dark Mode Toggle ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const icon = themeToggle.querySelector('i');
+
+            if(localStorage.getItem('theme') === 'light') {
+                body.classList.add('light-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                if(body.classList.contains('light-mode')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+
+            // --- 2. Scroll Animation (Fade Up) ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            const hiddenElements = document.querySelectorAll('.hidden');
+            hiddenElements.forEach((el) => observer.observe(el));
+
+            // --- 3. Smooth Scroll ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
